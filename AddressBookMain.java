@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 class Contacts{
    String fName, lName, address, city, state;
    Long zipCode, phoneNum;
@@ -25,9 +27,33 @@ class Contacts{
 
 public class AddressBookMain {
 
+   static String Input1(String a) {
+      Scanner i1 = new Scanner(System.in);
+      System.out.println(a);
+      String input1 = i1.nextLine();
+      return input1;
+   }
+
+   static long Input2(String b) {
+      Scanner i2 = new Scanner(System.in);
+      System.out.println(b);
+      long input2 = i2.nextLong();
+      return input2;
+   }
+
+
    public static void main(String args[]) {
 
+      String firstName = Input1("Enter First Name: ");
+      String lastName = Input1("Enter last Name: ");
+      String address = Input1("Enter your address: ");
+      String city = Input1("Enter your city: ");
+      String state = Input1("Enter your state: ");
+      long zipCode = Input2("Enter zip code of your area: ");
+      long phoneNum = Input2("Enter phone number: ");
+      String email = Input1("Enter your EMail ID: ");
+
       System.out.println("Welcome to Address Book");
-      Contacts sanketh =  new Contacts("Sanketh", "Chigurupalli", "Alwal", "Hyderabad", "Telangana", 500015L, 9000990009L, "nothing@mymail.com");
+      Contacts sanketh =  new Contacts(firstName, lastName, address, city, state, zipCode, phoneNum, email);
    }
 }
