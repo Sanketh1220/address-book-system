@@ -18,7 +18,6 @@ public class ContactOfPerson {
         setZip(zip);
     }
 
-    //using getter and setter
     public String getFirstName() {
         return firstName;
     }

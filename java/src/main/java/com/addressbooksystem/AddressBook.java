@@ -52,10 +52,8 @@ public class AddressBook {
                 personByCity.put(city,new ArrayList<ContactOfPerson>());
             }
             personByCity.get(city).add(contactofPerson);
-
-
-
-        }return contactList;}
+        }return contactList;
+    }
 
     public boolean editContactDetails(String Name) {
         int flag = 0;
@@ -101,6 +99,7 @@ public class AddressBook {
         }
         return flag == 1;
     }
+
     public boolean checkDuplicate(String fname)
     {
         int flag=0;
