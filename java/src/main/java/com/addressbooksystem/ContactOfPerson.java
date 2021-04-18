@@ -19,12 +19,13 @@ public class ContactOfPerson {
 
     }
 
+    // using getter and setter
     public String getFirstName() {
         return firstName;
     }
 
     public void setFirstName(String firstName) {
-        this.firstName = firstName;                                           // using getter and setter
+        this.firstName = firstName;
     }
 
     public String getLastName() {
