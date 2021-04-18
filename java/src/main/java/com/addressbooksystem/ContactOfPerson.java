@@ -1,6 +1,7 @@
 package com.addressbooksystem;
 
 public class ContactOfPerson {
+    // Attributes of person
     private String firstName, lastName, address, city, state, email, zip, phoneNumber;
 
     // constructor of contactOfperson
@@ -17,16 +18,13 @@ public class ContactOfPerson {
 
     }
 
-    public ContactOfPerson() {
-
-    }
-
+    // using getter and setter
     public String getFirstName() {
         return firstName;
     }
 
     public void setFirstName(String firstName) {
-        this.firstName = firstName;                                           // using getter and setter
+        this.firstName = firstName;
     }
 
     public String getLastName() {
