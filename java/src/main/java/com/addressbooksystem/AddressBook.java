@@ -113,14 +113,12 @@ public class AddressBook {
         }
         return flag == 1;
     }
-
     public void getPersonNameByState(String State) {
         List<ContactOfPerson> list  = contactList.stream().filter(contactName ->contactName.getState().equals(State)).collect(Collectors.toList());
         for(ContactOfPerson contact: list){
             System.out.println("First Name: "+contact.getFirstName());
             System.out.println("Last Name: "+contact.getLastName());
         }
-
     }
 
     public void getPersonNameByCity(String cityName) {
