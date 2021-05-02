@@ -25,9 +25,11 @@ public class MenuBar {
             System.out.println("10. Sort Contact By State");
             System.out.println("11. Write data");
             System.out.println("12. Read data");
-            System.out.println("13. Read data into CSV File");
-            System.out.println("14. Write data into CSV File");
-            System.out.println("15. Exit");
+            System.out.println("13. Write data into CSV File");
+            System.out.println("14. Read data from CSV File");
+            System.out.println("15. Write data into JSON File");
+            System.out.println("16. Read data from JSON File");
+            System.out.println("17. Exit");
 
             System.out.println("Enter choice: ");
             int option = sc.nextInt();
@@ -111,7 +113,23 @@ public class MenuBar {
                     }catch (IOException e) {
                         e.printStackTrace();
                     }
+                    break;
                 case 15:
+                    try {
+                        AddressBook.writeDataToJSon();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    break;
+
+                case 16:
+                    try {
+                        AddressBook.readDataFromJson();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    break;
+                case 17:
                     flag = false;
                     break;
             }
