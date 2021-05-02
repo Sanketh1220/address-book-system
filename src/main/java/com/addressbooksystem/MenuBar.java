@@ -1,0 +1,169 @@
+/****************************************************
+ * Purpose : Program is written to collect a contacts into different address books
+ *
+ * @author Sanketh Chigurupalli
+ * @version 1.0
+ * @since 28-04-2021
+ *
+ ****************************************************/
+
+package com.addressbooksystem;
+
+import com.opencsv.exceptions.CsvDataTypeMismatchException;
+import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
+
+import java.io.IOException;
+import java.util.Scanner;
+
+public class MenuBar {
+
+    /**
+     * Main method to access a program
+     * @param args
+     */
+    public static void main(String[] args) {
+        // prints a welcome note
+        System.out.println("****Welcome to the Address Book System****");
+        AddressBookMain addressBookMain = new AddressBookMain();
+        Scanner sc = new Scanner(System.in);
+        boolean flag = true;
+
+        /**
+         * Runs until the flag turns to true
+         * Gives an option to different use cases
+         */
+        while (flag) {
+            System.out.println("1. Add New Address Book");
+            System.out.println("2. Search Contact from a city");
+            System.out.println("3. Search Contact from a State");
+            System.out.println("4. View contact By State ");
+            System.out.println("5. View Contact by city ");
+            System.out.println("6. Count Contact By State");
+            System.out.println("7. Count Contact By City");
+            System.out.println("8. Sort Contact By Name");
+            System.out.println("9. Sort Contact By City");
+            System.out.println("10. Sort Contact By State");
+            System.out.println("11. Write data");
+            System.out.println("12. Read data");
+            System.out.println("13. Write data into CSV File");
+            System.out.println("14. Read data from CSV File");
+            System.out.println("15. Write data into JSON File");
+            System.out.println("16. Read data from JSON File");
+            System.out.println("17. Exit");
+
+            System.out.println("Enter choice: ");
+            int option = sc.nextInt();
+
+            switch (option) {
+                /**
+                 * adds a new book to address book
+                 * checks for duplicate books
+                 */
+                case 1: {
+                    System.out.println("Enter the Name of Address Book: ");
+                    String addressBookName = sc.next();
+                    if (AddressBookMain.addressBookListMap.containsKey(addressBookName)) {
+                        System.out.println("The Address book Already Exists");
+                        addressBookMain.addAddressBook(addressBookName);
+                        break;
+                    } else {
+                        addressBookMain.addAddressBook(addressBookName);
+                        break;
+                    }
+                }
+                /**
+                 * Searches, counts, sorts contacts through address books
+                 */
+                case 2:
+                    System.out.println("Enter Name of City: ");
+                    String cityName = sc.next();
+                    addressBookMain.searchPersonByCity(cityName);
+                    break;
+
+                case 3:
+                    System.out.println("Enter Name of State: ");
+                    String stateName = sc.next();
+                    addressBookMain.searchPersonByState(stateName);
+                    break;
+
+                case 4:
+                    System.out.println("Enter Name of State: ");
+                    String stateName1 = sc.next();
+                    addressBookMain.viewPersonByStateUsingHashmap(stateName1);
+                    break;
+
+                case 5:
+                    System.out.println("Enter Name of City: ");
+                    String cityName1 = sc.next();
+                    addressBookMain.viewPersonByCityUsingHashMap(cityName1);
+                    break;
+                case 6:
+                    System.out.println("Enter Name of State: ");
+                    String stateName2 = sc.next();
+                    addressBookMain.CountByState(stateName2);
+                    break;
+
+                case 7:
+                    System.out.println("Enter Name of City: ");
+                    String cityName2 = sc.next();
+                    addressBookMain.CountByCity(cityName2);
+                    break;
+                case 8:
+                    System.out.println("Sort Contact");
+                    addressBookMain.sortContactByName();
+                case 9:
+                    System.out.println("Sort Contact");
+                    addressBookMain.sortContactByCity();
+                    break;
+
+                case 10:
+                    System.out.println("Sort Contact");
+                    addressBookMain.sortContactByState();
+                    break;
+
+                /**
+                 * Writes and reads a data to and from ".txt" file ".csv" file and ".json" file
+                 */
+                case 11:
+                    AddressBook.writeData(addressBookMain);
+                    break;
+                case 12:
+                    AddressBook.readData(addressBookMain);
+                    break;
+                case 13:
+                    try {
+                        AddressBook.writeDataToCSV();
+                    }catch (IOException | CsvRequiredFieldEmptyException | CsvDataTypeMismatchException e) {
+                        e.printStackTrace();
+                    }
+                    break;
+                case 14:
+                    try {
+                        AddressBook.readDataFromCSV();
+                    }catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    break;
+                case 15:
+                    try {
+                        AddressBook.writeDataToJSon();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    break;
+
+                case 16:
+                    try {
+                        AddressBook.readDataFromJson();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    break;
+
+                case 17:
+                    flag = false;
+                    break;
+            }
+        }
+    }
+}
