@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class MenuBar {
     public static void main(String[] args) {
-        System.out.println("Welcome to the Address Book System");
+        System.out.println("****Welcome to the Address Book System****");
         AddressBookMain addressBookMain = new AddressBookMain();
         Scanner sc = new Scanner(System.in);
         boolean flag = true;
