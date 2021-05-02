@@ -1,5 +1,9 @@
 package com.addressbooksystem;
 
+import com.opencsv.exceptions.CsvDataTypeMismatchException;
+import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
+
+import java.io.IOException;
 import java.util.Scanner;
 
 public class MenuBar {
@@ -21,7 +25,9 @@ public class MenuBar {
             System.out.println("10. Sort Contact By State");
             System.out.println("11. Write data");
             System.out.println("12. Read data");
-            System.out.println("12. Exit");
+            System.out.println("13. Read data into CSV File");
+            System.out.println("14. Write data into CSV File");
+            System.out.println("15. Exit");
 
             System.out.println("Enter choice: ");
             int option = sc.nextInt();
@@ -93,6 +99,19 @@ public class MenuBar {
                     AddressBook.readData(addressBookMain);
                     break;
                 case 13:
+                    try {
+                        AddressBook.writeDataToCSV();
+                    }catch (IOException | CsvRequiredFieldEmptyException | CsvDataTypeMismatchException e) {
+                        e.printStackTrace();
+                    }
+                    break;
+                case 14:
+                    try {
+                        AddressBook.readDataFromCSV();
+                    }catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                case 15:
                     flag = false;
                     break;
             }
