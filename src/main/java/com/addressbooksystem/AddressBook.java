@@ -165,7 +165,8 @@ public class AddressBook {
      * @param cityName
      */
     public void getPersonNameByCity(String cityName) {
-        List<ContactOfPerson> list = contactList.stream().filter(contactName -> contactName.getCity().equals(cityName)).collect(Collectors.toList());
+        List<ContactOfPerson> list = contactList.stream().filter(contactName -> contactName.getCity().
+                equals(cityName)).collect(Collectors.toList());
         for (ContactOfPerson contact : list) {
             System.out.println("First Name: " + contact.getFirstName());
             System.out.println("Last Name: " + contact.getLastName());
