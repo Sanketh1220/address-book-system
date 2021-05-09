@@ -36,12 +36,22 @@ public class AddressBookDBService {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(url, username, password);
-
-            /**
-             * Created a prepared statement for writing a data into contacts
-             * Intializing a set of attributes to execute them
-             * UC-17
-             */
+//
+//            /**
+//             * Here we are displaying a data
+//             * Looping through data
+//             * UC-16
+//             */
+//            Statement statement = connection.createStatement();
+//            ResultSet resultSet = statement.executeQuery("SELECT * FROM contacts");
+//
+//            ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
+//
+//            /**
+//             * Created a prepared statement for writing a data into contacts
+//             * Intializing a set of attributes to execute them
+//             * UC-17
+//             */
 //            PreparedStatement preparedStatement = connection.prepareStatement
 //                    ("insert into contacts (first_name, last_name, address, city, state, zip_code, phone_number, email)" +
 //                            "values(?,?,?,?,?,?,?,?)");
@@ -54,39 +64,35 @@ public class AddressBookDBService {
 //            preparedStatement.setInt(6, 89654);
 //            preparedStatement.setString(7, "7654431221");
 //            preparedStatement.setString(8, "vamsi.krishna@gmail.com");
-
+//
 //            int j = preparedStatement.executeUpdate();
+//
+//            /**
+//             * UC-18
+//             * Altered table using statement
+//             */
+//            Statement statement1 = connection.createStatement();
+//            statement1.executeUpdate("ALTER TABLE contacts ADD date_added date;");
+//
+//            /**
+//             * Created a SQL statement to get contacts between particular interval
+//             */
+//            Statement statement2 = connection.createStatement();
+//            ResultSet resultSet2 = statement2.executeQuery("SELECT * from contacts WHERE date_added BETWEEN " +
+//                    "CAST('2017-01-01' AS DATE) AND DATE(NOW());");
 
-            /**
-             * Altered table using statement
-             */
-            Statement statement1 = connection.createStatement();
-            statement1.executeUpdate("ALTER TABLE contacts ADD date_added date;");
-
-            /**
-             * Created a SQL statement to get contacts between particular interval
-             */
-            Statement statement2 = connection.createStatement();
-            ResultSet resultSet2 = statement2.executeQuery("SELECT * from contacts WHERE date_added BETWEEN " +
-                    "CAST('2017-01-01' AS DATE) AND DATE(NOW());");
-            Statement statement = connection.createStatement();
-
-            /**
-             * Here we are displaying a data
-             * Looping through data
-             */
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM contacts");
-
-            ResultSetMetaData resultSetMetaData = resultSet2.getMetaData();
+            Statement statement3 = connection.createStatement();
+            ResultSet resultSet3 = statement3.executeQuery("Select * from contacts where city = 'Hyderabad';");
+            ResultSetMetaData resultSetMetaData3 = resultSet3.getMetaData();
 
             /**
              * Untill the table has next element it keeps printing data
              */
-            while (resultSet2.next()) {
-                for(int i = 1; i <= resultSetMetaData.getColumnCount(); i++) {
+            while (resultSet3.next()) {
+                for(int i = 1; i <= resultSetMetaData3.getColumnCount(); i++) {
                     if (i > 1) System.out.print(",  ");
-                    String columnValue = resultSet2.getString(i);
-                    System.out.print(resultSetMetaData.getColumnName(i) + " - " +columnValue );
+                    String columnValue = resultSet3.getString(i);
+                    System.out.print(resultSetMetaData3.getColumnName(i) + " - " +columnValue );
                 }
                 System.out.println();
             }
