@@ -56,7 +56,7 @@ public class AddressBookDBService {
              * Handling the ClassNotFound exception and SQL exception
              */
         } catch (ClassNotFoundException exception) {
-//            exception.printStackTrace();
+
         } finally {
             if(connection != null) {
                 connection.close();
