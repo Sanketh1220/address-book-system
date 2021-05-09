@@ -42,23 +42,33 @@ public class AddressBookDBService {
              * Intializing a set of attributes to execute them
              * UC-17
              */
-            PreparedStatement preparedStatement = connection.prepareStatement
-                    ("insert into contacts (first_name, last_name, address, city, state, zip_code, phone_number, email)" +
-                            "values(?,?,?,?,?,?,?,?)");
+//            PreparedStatement preparedStatement = connection.prepareStatement
+//                    ("insert into contacts (first_name, last_name, address, city, state, zip_code, phone_number, email)" +
+//                            "values(?,?,?,?,?,?,?,?)");
+//
+//            preparedStatement.setString(1,"Vamsi");
+//            preparedStatement.setString(2,"Krishna");
+//            preparedStatement.setString(3,"Thimali");
+//            preparedStatement.setString(4, "kolkata");
+//            preparedStatement.setString(5, "Bengal");
+//            preparedStatement.setInt(6, 89654);
+//            preparedStatement.setString(7, "7654431221");
+//            preparedStatement.setString(8, "vamsi.krishna@gmail.com");
 
-            preparedStatement.setString(1,"Vamsi");
-            preparedStatement.setString(2,"Krishna");
-            preparedStatement.setString(3,"Thimali");
-            preparedStatement.setString(4, "kolkata");
-            preparedStatement.setString(5, "Bengal");
-            preparedStatement.setInt(6, 89654);
-            preparedStatement.setString(7, "7654431221");
-            preparedStatement.setString(8, "vamsi.krishna@gmail.com");
+//            int j = preparedStatement.executeUpdate();
 
-            int j = preparedStatement.executeUpdate();
+            /**
+             * Altered table using statement
+             */
+            Statement statement1 = connection.createStatement();
+            statement1.executeUpdate("ALTER TABLE contacts ADD date_added date;");
 
-
-
+            /**
+             * Created a SQL statement to get contacts between particular interval
+             */
+            Statement statement2 = connection.createStatement();
+            ResultSet resultSet2 = statement2.executeQuery("SELECT * from contacts WHERE date_added BETWEEN " +
+                    "CAST('2017-01-01' AS DATE) AND DATE(NOW());");
             Statement statement = connection.createStatement();
 
             /**
@@ -67,19 +77,20 @@ public class AddressBookDBService {
              */
             ResultSet resultSet = statement.executeQuery("SELECT * FROM contacts");
 
-            ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
+            ResultSetMetaData resultSetMetaData = resultSet2.getMetaData();
 
             /**
              * Untill the table has next element it keeps printing data
              */
-            while (resultSet.next()) {
+            while (resultSet2.next()) {
                 for(int i = 1; i <= resultSetMetaData.getColumnCount(); i++) {
                     if (i > 1) System.out.print(",  ");
-                    String columnValue = resultSet.getString(i);
+                    String columnValue = resultSet2.getString(i);
                     System.out.print(resultSetMetaData.getColumnName(i) + " - " +columnValue );
                 }
                 System.out.println();
             }
+
 
             connection.close();
 
