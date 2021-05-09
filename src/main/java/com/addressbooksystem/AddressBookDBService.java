@@ -36,8 +36,37 @@ public class AddressBookDBService {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(url, username, password);
+
+            /**
+             * Created a prepared statement for writing a data into contacts
+             * Intializing a set of attributes to execute them
+             * UC-17
+             */
+            PreparedStatement preparedStatement = connection.prepareStatement
+                    ("insert into contacts (first_name, last_name, address, city, state, zip_code, phone_number, email)" +
+                            "values(?,?,?,?,?,?,?,?)");
+
+            preparedStatement.setString(1,"Vamsi");
+            preparedStatement.setString(2,"Krishna");
+            preparedStatement.setString(3,"Thimali");
+            preparedStatement.setString(4, "kolkata");
+            preparedStatement.setString(5, "Bengal");
+            preparedStatement.setInt(6, 89654);
+            preparedStatement.setString(7, "7654431221");
+            preparedStatement.setString(8, "vamsi.krishna@gmail.com");
+
+            int j = preparedStatement.executeUpdate();
+
+
+
             Statement statement = connection.createStatement();
+
+            /**
+             * Here we are displaying a data
+             * Looping through data
+             */
             ResultSet resultSet = statement.executeQuery("SELECT * FROM contacts");
+
             ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
 
             /**
@@ -51,6 +80,8 @@ public class AddressBookDBService {
                 }
                 System.out.println();
             }
+
+            connection.close();
 
             /**
              * Handling the ClassNotFound exception and SQL exception
