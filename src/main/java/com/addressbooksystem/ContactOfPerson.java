@@ -1,10 +1,35 @@
+/****************************************************
+ * Purpose : Program is written to collect a contacts into different address books
+ *
+ * @author Sanketh Chigurupalli
+ * @version 1.0
+ * @since 28-04-2021
+ *
+ ****************************************************/
+
 package com.addressbooksystem;
 
+/**
+ * Created a POJO
+ */
 public class ContactOfPerson {
-    // Attributes of person
+    /**
+     * Created attributes for the class
+     */
     private String firstName, lastName, address, city, state, email, zip, phoneNumber;
 
-    // constructor of contactOfperson
+    /**
+     * Created a constructor with
+     * @param firstName
+     * @param lastName
+     * @param address
+     * @param city
+     * @param state
+     * @param email
+     * @param phoneNumber
+     * @param zip
+     *
+     */
     public ContactOfPerson(String firstName, String lastName, String address, String city, String state, String email,
                            String phoneNumber, String zip) {
         setFirstName(firstName);
@@ -18,16 +43,16 @@ public class ContactOfPerson {
 
     }
 
-    public ContactOfPerson() {
-
-    }
-
+    /**
+     * Intialised getter and setters for all attributes
+     * @return
+     */
     public String getFirstName() {
         return firstName;
     }
 
     public void setFirstName(String firstName) {
-        this.firstName = firstName;                                           // using getter and setter
+        this.firstName = firstName;
     }
 
     public String getLastName() {
@@ -85,7 +110,11 @@ public class ContactOfPerson {
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
-    //to string generate
+
+    /**
+     * returns the date into string
+     * @return
+     */
     @Override
     public String toString() {
         return "ContactOfPerson [firstName=" + firstName + ", lastName=" + lastName + ", address=" + address + ", city="

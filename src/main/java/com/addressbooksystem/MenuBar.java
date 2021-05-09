@@ -1,3 +1,12 @@
+/****************************************************
+ * Purpose : Program is written to collect a contacts into different address books
+ *
+ * @author Sanketh Chigurupalli
+ * @version 1.0
+ * @since 28-04-2021
+ *
+ ****************************************************/
+
 package com.addressbooksystem;
 
 import com.opencsv.exceptions.CsvDataTypeMismatchException;
@@ -7,11 +16,22 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class MenuBar {
+
+    /**
+     * Main method to access a program
+     * @param args
+     */
     public static void main(String[] args) {
+        // prints a welcome note
         System.out.println("****Welcome to the Address Book System****");
         AddressBookMain addressBookMain = new AddressBookMain();
         Scanner sc = new Scanner(System.in);
         boolean flag = true;
+
+        /**
+         * Runs until the flag turns to true
+         * Gives an option to different use cases
+         */
         while (flag) {
             System.out.println("1. Add New Address Book");
             System.out.println("2. Search Contact from a city");
@@ -33,7 +53,12 @@ public class MenuBar {
 
             System.out.println("Enter choice: ");
             int option = sc.nextInt();
+
             switch (option) {
+                /**
+                 * adds a new book to address book
+                 * checks for duplicate books
+                 */
                 case 1: {
                     System.out.println("Enter the Name of Address Book: ");
                     String addressBookName = sc.next();
@@ -46,7 +71,9 @@ public class MenuBar {
                         break;
                     }
                 }
-
+                /**
+                 * Searches, counts, sorts contacts through address books
+                 */
                 case 2:
                     System.out.println("Enter Name of City: ");
                     String cityName = sc.next();
@@ -94,6 +121,9 @@ public class MenuBar {
                     addressBookMain.sortContactByState();
                     break;
 
+                /**
+                 * Writes and reads a data to and from ".txt" file ".csv" file and ".json" file
+                 */
                 case 11:
                     AddressBook.writeData(addressBookMain);
                     break;
@@ -129,6 +159,7 @@ public class MenuBar {
                         e.printStackTrace();
                     }
                     break;
+
                 case 17:
                     flag = false;
                     break;

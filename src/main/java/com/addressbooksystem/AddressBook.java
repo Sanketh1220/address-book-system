@@ -1,3 +1,12 @@
+/****************************************************
+ * Purpose : Program is written to collect a contacts into different address books
+ *
+ * @author Sanketh Chigurupalli
+ * @version 1.0
+ * @since 28-04-2021
+ *
+ ****************************************************/
+
 package com.addressbooksystem;
 
 import com.opencsv.CSVReader;
@@ -21,12 +30,20 @@ public class AddressBook {
     public HashMap<String, ArrayList<ContactOfPerson>> personByState;
     public HashMap<String, ArrayList<ContactOfPerson>> personByCity;
 
+    /**
+     * parsing a city as String and contacts as arraylist
+     * parsing a state as String and contacts as arraylist
+     */
     public AddressBook() {
         personByCity = new HashMap<String, ArrayList<ContactOfPerson>>();
         personByState = new HashMap<String, ArrayList<ContactOfPerson>>();
         contactList = new ArrayList<>();
     }
 
+    /**
+     * method to add contact
+     * @return
+     */
     public ArrayList<ContactOfPerson> addContactDetails() {
         System.out.println("Enter the Details of ContactDetails");
         System.out.println("Enter the first name");
@@ -59,12 +76,15 @@ public class AddressBook {
                 personByCity.put(city, new ArrayList<ContactOfPerson>());
             }
             personByCity.get(city).add(contactofPerson);
-
-
         }
         return contactList;
     }
 
+    /**
+     * method to edit contact
+     * @param Name
+     * @return
+     */
     public boolean editContactDetails(String Name) {
         int flag = 0;
         for (ContactOfPerson contact : contactList) {
@@ -94,6 +114,11 @@ public class AddressBook {
         return flag == 1;
     }
 
+    /**
+     * method to contact date by name
+     * @param name
+     * @return
+     */
     public boolean deleteContact(String name) {
         int flag = 0;
         for (ContactOfPerson contact : contactList) {
@@ -106,6 +131,11 @@ public class AddressBook {
         return flag == 1;
     }
 
+    /**
+     * checks for the duplicate person in the present data
+     * @param fname
+     * @return
+     */
     public boolean checkDuplicate(String fname) {
         int flag = 0;
         for (ContactOfPerson p : contactList) {
@@ -117,6 +147,10 @@ public class AddressBook {
         return flag == 1;
     }
 
+    /**
+     * getting a person by state
+     * @param State
+     */
     public void getPersonNameByState(String State) {
         List<ContactOfPerson> list = contactList.stream().filter(contactName -> contactName.getState().equals(State)).collect(Collectors.toList());
         for (ContactOfPerson contact : list) {
@@ -126,14 +160,23 @@ public class AddressBook {
 
     }
 
+    /**
+     * Getting a person name by city name
+     * @param cityName
+     */
     public void getPersonNameByCity(String cityName) {
-        List<ContactOfPerson> list = contactList.stream().filter(contactName -> contactName.getCity().equals(cityName)).collect(Collectors.toList());
+        List<ContactOfPerson> list = contactList.stream().filter(contactName -> contactName.getCity().
+                equals(cityName)).collect(Collectors.toList());
         for (ContactOfPerson contact : list) {
             System.out.println("First Name: " + contact.getFirstName());
             System.out.println("Last Name: " + contact.getLastName());
         }
     }
 
+    /**
+     * Writing a data into txt file
+     * @param addressBookMain
+     */
     public static void writeData(AddressBookMain addressBookMain) {
         StringBuffer personBuffer = new StringBuffer();
         contactList.forEach(person -> {
@@ -147,6 +190,10 @@ public class AddressBook {
         }
     }
 
+    /**
+     * reading data from txt file
+     * @param addressBookMain
+     */
     public static void readData(AddressBookMain addressBookMain) {
         try {
             Files.lines(new File("Contacts.txt").toPath()).map(String::trim).forEach(System.out::println);
@@ -155,6 +202,12 @@ public class AddressBook {
         }
     }
 
+    /**
+     * writing a data into CSV file
+     * @throws IOException
+     * @throws CsvRequiredFieldEmptyException
+     * @throws CsvDataTypeMismatchException
+     */
     public static void writeDataToCSV() throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
         try (Writer writer = Files.newBufferedWriter(Paths.get("Contacts.csv"));) {
             StatefulBeanToCsvBuilder<ContactOfPerson> builder = new StatefulBeanToCsvBuilder<>(writer);
@@ -166,6 +219,10 @@ public class AddressBook {
         }
     }
 
+    /**
+     * Reading a data into CSV file
+     * @throws IOException
+     */
     public static void readDataFromCSV() throws IOException {
         try (Reader reader = Files.newBufferedReader(Paths.get("Contacts.csv"));
              CSVReader csvReader = new CSVReaderBuilder(reader).withSkipLines(1).build();) {
@@ -183,6 +240,10 @@ public class AddressBook {
         }
     }
 
+    /**
+     * writing a data into JSON file
+     * @throws IOException
+     */
     public static void writeDataToJSon() throws IOException {
         {
             Path filePath = Paths.get("Contacts.json");
@@ -194,7 +255,10 @@ public class AddressBook {
         }
     }
 
-    // Read from JSON
+    /**
+     * reading a data from JSON file
+     * @throws IOException
+     */
     public static void readDataFromJson() throws IOException {
         ArrayList<ContactOfPerson> contactList = null;
         Path filePath = Paths.get("Contacts.json");
@@ -210,9 +274,7 @@ public class AddressBook {
                 System.out.println("Zip Code : " + contact.getZip());
                 System.out.println("Phone number : " + contact.getPhoneNumber());
                 System.out.println("Email : " + contact.getEmail());
-
             }
-
         }
     }
 }
